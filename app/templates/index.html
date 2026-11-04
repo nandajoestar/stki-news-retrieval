@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Cari berita Indonesia</h1>
+  <p>Mesin pencari dengan {{ total }} artikel dari Kompas, Tempo, dan Detik.</p>
+  <form action="{{ url_for('search') }}" method="get" class="search-form">
+    <input type="text" name="q" placeholder="Contoh: PHK pabrik rokok" autofocus required>
+    <button type="submit">Cari</button>
+  </form>
+</section>
+{% endblock %}

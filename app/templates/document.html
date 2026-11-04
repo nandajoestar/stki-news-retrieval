@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{ doc.judul }}{% endblock %}
+{% block content %}
+<article class="document">
+  <div class="meta">{{ doc.sumber|upper }} · {{ doc.waktu }}</div>
+  <h1>{{ doc.judul }}</h1>
+  <p>{{ doc.isi }}</p>
+  <p class="meta">{% for t in doc.tags %}<span class="tag">{{ t }}</span>{% endfor %}</p>
+  <p><a href="{{ doc.link }}" target="_blank" rel="noopener">Baca di sumber asli ↗</a> ·
+     <a href="javascript:history.back()">← Kembali</a></p>
+</article>
+{% endblock %}

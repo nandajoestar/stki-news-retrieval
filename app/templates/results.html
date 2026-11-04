@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{ query }} - Pencari Berita STKI{% endblock %}
+{% block content %}
+<form action="{{ url_for('search') }}" method="get" class="search-form compact">
+  <input type="text" name="q" value="{{ query }}" required>
+  <button type="submit">Cari</button>
+</form>
+
+{% if not query %}
+  <p class="muted">Masukkan kata kunci pencarian.</p>
+{% elif results %}
+  <p class="muted">{{ results|length }} hasil teratas untuk “{{ query }}”</p>
+  {% for r in results %}
+  <article class="result">
+    <div class="meta">{{ r.sumber|upper }} · {{ r.waktu }}</div>
+    <h2><a href="{{ url_for('document', doc_id=r.id) }}">{{ r.judul }}</a></h2>
+    <p>{{ r.snippet }}</p>
+    <div class="meta">Skor cosine: <strong>{{ r.score }}</strong>
+      {% for t in r.tags[:3] %}<span class="tag">{{ t }}</span>{% endfor %}</div>
+  </article>
+  {% endfor %}
+{% else %}
+  <p class="muted">Tidak ada dokumen yang cocok dengan “{{ query }}”. Coba kata kunci lain.</p>
+{% endif %}
+{% endblock %}
